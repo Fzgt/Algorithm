@@ -8,9 +8,8 @@
   </div>
 
   <script>
-    const NUM = 100000
     // 方案一：无脑添加
-    const NUM1 = NUM;
+    const NUM1 = 100000;
     let list1 = document.getElementById("list1");
     document.getElementById("btn1").addEventListener('click', bigInsert1);
     function bigInsert1() {
@@ -21,29 +20,37 @@
         list1.appendChild(item);
       }
     }
-    // 方案二：时间切片
-    const NUM2 = NUM
+
+    // 渲染10W条数据方案 时间切片
+    const NUM2 = 100000
     let list2 = document.getElementById("list2");
-    let f = document.createDocumentFragment();
     let i = 0;
     let timer = null
 
     document.getElementById("btn2").addEventListener('click', () => {
       timer = requestIdleCallback(bigInsert2);
     });
-    function bigInsert2(deadline) {
+
+    function bigInsert2(deadline) { // deadline参数包含当前帧剩余时间
+      let fragment = document.createDocumentFragment();
+
       while (deadline.timeRemaining() > 10 && i < NUM2) {
-        console.log('空闲执行中');
         let item = document.createElement("li");
         item.innerText = `第${i++}条数据`;
-        list2.appendChild(item)
-        if (i % 100 === 0) break; // 每次渲染 100 条
+        fragment.appendChild(item);
+
+        if (i % 100 === 0) break; // 执行100次循环主动中断
       }
 
+      list2.appendChild(fragment); // 一次性将100个元素添加到DOM，减少回流
+
       if (i < NUM2) {
-        timer = requestIdleCallback(bigInsert2)
+        timer = requestIdleCallback(bigInsert2);
       }
     }
+
+
+    // clear
     document.getElementById("btn3").addEventListener('click', () => {
       list1.innerHTML = '';
       list2.innerHTML = '';
