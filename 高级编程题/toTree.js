@@ -5,40 +5,24 @@
 // 遍历完输入数组后，输出树形结构的第一层即可。
 
 function toTree(arr) {
-    // const tree = [];
-    // const map = {};
-
-    // for (const item of arr) {
-    //     const { id, parentId, ...rest } = item;
-    //     const node = { id, children: [], ...rest };
-
-    //     if (parentId === 0) {
-    //         tree.push(node);
-    //     } else {
-    //         if (!map[parentId]) {
-    //             map[parentId] = { children: [] };
-    //         }
-    //         map[parentId].children.push(node);
-    //     }
-
-    //     map[id] = node;
-    // }
-
-    // return tree;
-
     const tree = [];
-    const map = {}
+    const map = {};
 
     for (const item of arr) {
         const { id, parentId, ...rest } = item;
         const node = { id, children: [], ...rest };
 
         if (parentId === 0) {
-            tree.push(node)
+            tree.push(node);
         } else {
             if (!map[parentId]) {
-
+                map[parentId] = { children: [] };
             }
+            map[parentId].children.push(node);
         }
+
+        map[id] = node;
     }
+
+    return tree;
 }
