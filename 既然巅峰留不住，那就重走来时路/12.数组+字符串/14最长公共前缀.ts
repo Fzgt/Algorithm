@@ -1,4 +1,4 @@
-// 3. 最长公共前缀
+// 14. 最长公共前缀
 function longestCommonPrefix(strs: string[]): string {
     if (strs === null || strs.length === 0) return '';
     let prevs = strs[0];
