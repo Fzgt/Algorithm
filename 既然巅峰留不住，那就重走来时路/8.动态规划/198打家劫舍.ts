@@ -6,8 +6,9 @@ function rob(nums: number[]): number {
     const g = new Array(n + 1).fill(0);
 
     for (let i = 1; i <= n; i++) {
-        f[i] = g[i - 1] + nums[i - 1];
-        g[i] = Math.max(f[i - 1], g[i - 1]);
+        f[i] = g[i - 1] + nums[i - 1]; // f[i]偷这家 = g[i - 1]不偷上家 + nums[i - 1]当前这家的金额
+        g[i] = Math.max(f[i - 1], g[i - 1]); // g[i]不偷这家 = 上家可偷可不偷 取最大值
+        // 所谓这家是i-1, f[i] g[i]都是记录i-1的
     }
 
     return Math.max(f[n], g[n]);
