@@ -5,7 +5,7 @@ function search(nums: number[], target: number): number {
     while (start <= end) {
         let mid = start + ((end - start) >> 1);
 
-        if (nums[mid] === target) return mid;
+        if (nums[mid] === target) return mid; // 这里处理mid等于target的情况，所以底下的if语句都不包含mid
 
         if (nums[start] <= nums[mid]) { // 判断左边有序就左边找，否则就去右边找，二分查找只作用于有序数组
             if (nums[start] <= target && target < nums[mid]) {

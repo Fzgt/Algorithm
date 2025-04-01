@@ -1,4 +1,4 @@
-// 912. 排序数组 冒泡排序版 111
+// 912. 排序数组 冒泡排序版
 function sortArray(nums: number[]): number[] {
     let len = nums.length - 1;
     for (let i = 0; i < len; i++) {
