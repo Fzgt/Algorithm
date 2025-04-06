@@ -11,21 +11,23 @@
  */
 // 19. 删除链表的倒数第N个结点
 function removeNthFromEnd(head: ListNode | null, n: number): ListNode | null {
-    const dummyNode = new ListNode(-1);
+    const dummyNode = new ListNode(0); // 处理头节点被删除的情况
     dummyNode.next = head;
 
-    let fast: ListNode | null = dummyNode;
-    let slow: ListNode | null = dummyNode;
+    let fast = dummyNode;
+    let slow = dummyNode;
 
     for (let i = 0; i < n; i++) {
-        fast = fast.next;
+        fast = fast.next; // 先让fast指针向前移动n步，这样fast和slow之间就间隔了n个节点
     }
 
-    while (fast.next) {
+    while (fast && fast.next) {
         fast = fast.next;
         slow = slow.next;
     }
 
+    // 此时slow指向的就是要删除节点的前一个节点
+    // 删除slow.next节点
     slow.next = slow.next.next;
 
     return dummyNode.next;

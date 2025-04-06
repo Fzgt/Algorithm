@@ -14,14 +14,18 @@ function swapPairs(head: ListNode | null): ListNode | null {
     const dummyNode = new ListNode(-1);
     dummyNode.next = head;
     let prev = dummyNode;
-    while (prev.next !== null && prev.next.next !== null) {
-        let node1 = prev.next;
-        let node2 = prev.next.next;
 
+    while (prev.next && prev.next.next) {
+        const node1 = prev.next;
+        const node2 = prev.next.next;
+
+        const nex = node2.next;
         prev.next = node2;
-        node1.next = node2.next;
         node2.next = node1;
+        node1.next = nex;
+
         prev = node1;
     }
+
     return dummyNode.next;
 };

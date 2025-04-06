@@ -9,7 +9,7 @@ function jump(nums: number[]): number {
             if (i + nums[i] >= pos) {
                 pos = i;
                 step++;
-                break;
+                break; // 找到了就要break退出去，每个for循环就是为了找第一个能跳到pos位置的
             }
         }
     }
