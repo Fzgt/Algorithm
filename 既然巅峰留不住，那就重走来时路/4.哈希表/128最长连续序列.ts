@@ -1,6 +1,6 @@
 // 128. 最长连续序列
 function longestConsecutive(nums: number[]): number {
-    const set: Set<number> = new Set();
+    const set: Set<number> = new Set(); // 不声明set类型会编译报错
 
     for (const num of nums) {
         set.add(num);
