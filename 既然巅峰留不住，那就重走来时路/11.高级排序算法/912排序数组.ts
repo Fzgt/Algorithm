@@ -8,7 +8,7 @@ const quick_sort = (q: number[], l: number, r: number): void => {
     if (l >= r) return;
 
     let i = l - 1, j = r + 1;
-    const x = q[Math.floor((l + r) >> 1)];
+    const x = q[(l + r) >> 1];
 
     while (i < j) {
         do i++; while (q[i] < x);
