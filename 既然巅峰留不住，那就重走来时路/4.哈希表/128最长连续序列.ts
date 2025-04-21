@@ -13,7 +13,7 @@ function longestConsecutive(nums: number[]): number {
         let cur = num;
         let curStreak = 1;
 
-        if (!set.has(num - 1)) { // 如果nums[i]小1的元素不存在，它就可以作为起始，这样可以少判断很多次
+        if (!set.has(num - 1)) { // 如果nums[i]小1的元素不存在，它就可以作为起始，这样可以少判断很多次, 不加超时
 
             while (set.has(cur + 1)) {
                 cur = cur + 1;
