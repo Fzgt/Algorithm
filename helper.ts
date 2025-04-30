@@ -1,23 +1,29 @@
-function trap(height: number[]): number {
-    let l = 0, r = height.length - 1;
-    let lMax = 0, rMax = 0, ans = 0;
+function findAnagrams(s: string, p: string): number[] {
+    const map = new Map();
+    const window = new Map();
+    for (const x of p) {
+        map.set(x, (map.get(x) || 0) + 1);
+    }
 
-    while (l < r) {
-        if (height[l] < height[r]) {
-            if (lMax >= height[l]) {
-                ans += lMax - height[l];
-            } else {
-                lMax = height[l];
-            }
+    let ans = [];
+    let l = 0;
+    for (let r = 0; r < s.length; r++) {
+        let cur = s[r];
+        window.set(cur, (window.get(cur) || 0) + 1);
+
+        if (r - l + 1 > p.length) {
+            let leftChar = s[l];
+            window.set(leftChar, window.get(leftChar) - 1);
+            if (window.get(leftChar) <= 0) window.delete(leftChar);
             l++;
-        } else {
-            if (rMax > height[r]) {
-                ans += rMax - height[r];
-            } else {
-                rMax = height[r];
-            }
-            r--;
         }
+        
+        if (r - l + 1 === p.length) {
+            if (mapEqual(map, window)) {
+                ans.push(l);
+            }
+        }
+
     }
 
     return ans;
