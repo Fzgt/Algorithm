@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="progress-bar" style="background: lightblue;width: 0px;height: 20px;"></div>
+    <button id="btn">start</button>
+    <script>
+        //rAF的用法 页面上绘制一个进度条 值0% → 100%
+        let btn = document.getElementById('btn')
+        let div = document.getElementById('progress-bar')
+        let start
+        function progress() {
+            div.style.width = div.offsetWidth + 1 + "px"
+            div.innerHTML = (div.offsetWidth) + '%'
+            if(div.offsetWidth < 100){
+                let current = Date.now()
+                console.log(current - start)//开始准备执行到真正执行的时间差
+                start = current
+                requestAnimationFrame(progress)
+            }
+        }
+
+        btn.addEventListener('click',() => {
+          div.style.width = 0           //先把宽度清除 rAF后面会用到
+          let current = Date.now()
+          start = current
+          requestAnimationFrame(progress)
+        })
+    </script>
+</body>
+</html>

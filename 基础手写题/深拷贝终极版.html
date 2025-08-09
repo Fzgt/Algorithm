@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const isComplexDataType = obj => (typeof obj === 'object' || typeof obj === 'function') && (obj !== null)
+        //判断被拷贝的对象是不是复杂数据类型  参数为obj的箭头函数 当obj不为空且obj为object类型或function类型返回true
+        const deepClone = function (obj, hash = new WeakMap()) {
+            // 定了deepclone深拷贝函数，第一个参数为拷贝对象，第二个对象默认为WeakMap类型的实例
+            if (hash.has(obj)) return hash.get(obj)
+            //如果WeakMap实例对象中有该对象 就返回该对象的值，没有就返回undefined      
+            let type = [Date, RegExp, Set, Map, WeakMap, WeakSet]
+            //设置一个类型数组，包括了六种难以拷贝的引用数据类型
+            if (type.includes(obj.constructor)) return new obj.constructor(obj)
+            //如果类型数组里面包含了该对象的类型  就返回该
+            let allDesc = Object.getOwnPropertyDescriptors(obj);
+
+            let cloneObj = Object.create(Object.getPrototypeOf(obj), allDesc);
+            
+            hash.set(obj, cloneObj)
+            for (let key of Reflect.ownKeys(obj)) {
+                cloneObj[key] = (isComplexDataType(obj[key]) & typeof obj[key] !== 'function') ? deepClone(obj[key], hash) : obj[key];
+            }
+            return cloneObj;
+        }
+        var obj = {
+            aaa: "aaaa",
+            bbb: function () { console.log('111') },
+            data: new Date(),
+            set: new Set([1, 2]),
+            abc: /^\w$/
+        };
+        var obj1 = {}
+        obj1 = deepClone(obj)
+        obj1.set.add(5)
+        obj1.data.setTime(5)
+        console.log(obj, obj1)
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,7 +1,7 @@
 
 Function.prototype.apply = (obj, ...args) => {
   if (typeof this !== 'function') {
-    throw new Error('this is not a funciton');
+    throw new Error('this is not a function');
   }
   let result = null;
   obj = obj || window;

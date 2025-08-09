@@ -1,6 +1,7 @@
 // 53. 最大子数组和
 function maxSubArray(nums: number[]): number {
-    let ans = nums[0]; // 初始化为nums[0]可以处理所有情况，将 ans 初始化为 0，在某些情况下（如所有元素都是负数）会让 ans 无法更新，一直为 0
+    let ans = nums[0]; // 初始化为nums[0]可以处理所有情况，将 ans 初始化为 0，
+                       // 在某些情况下（如所有元素都是负数）会让 ans 无法更新，一直为 0
     let sum = 0;
     for (const num of nums) {
         if (sum + num > num) { // 判断之前的和是否对当前num有贡献，如果小于num那不如直接从num开始

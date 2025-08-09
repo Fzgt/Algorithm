@@ -1,3 +1,4 @@
+// 发布订阅模式
 const handlers = {};
 const e = {
 	on: (type, foo) => {
@@ -20,8 +21,6 @@ const e = {
 e.on("huxiao", () => {
 	console.log("i love you");
 });
-e.on("huxiao", () => {
-	console.log("i miss you");
-});
+e.on("huxiao");
 
 
