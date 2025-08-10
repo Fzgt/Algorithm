@@ -12,9 +12,11 @@ function minPathSum(grid: number[][]): number {
             } else {
                 // 只要i和j不为0, 就要计算它从上面和左边来的最小值
                 if (i) {
+                    // 会遍历i行的每个点，取上面点的最小值
                     record[i][j] = Math.min(record[i][j], record[i - 1][j] + grid[i][j]);
                 }
                 if (j) {
+                    // 会遍历j列的每个点，取左边点的最小值
                     record[i][j] = Math.min(record[i][j], record[i][j - 1] + grid[i][j]);
                 }
             }

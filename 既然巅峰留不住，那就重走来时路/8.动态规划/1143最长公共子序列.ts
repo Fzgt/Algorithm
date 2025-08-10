@@ -7,7 +7,7 @@ function longestCommonSubsequence(text1: string, text2: string): number {
         for (let j = 1; j <= n; j++) {
             const char2 = text2[j - 1];
             if (char1 === char2) {
-                dp[i][j] = dp[i - 1][j - 1] + 1;
+                dp[i][j] = dp[i - 1][j - 1] + 1; // 如果当前字符相同，则最长公共子序列长度加1
             } else {
                 dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
             }
