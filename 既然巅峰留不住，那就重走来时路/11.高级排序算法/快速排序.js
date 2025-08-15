@@ -1,15 +1,15 @@
-// 基础版
+// 老袁讲义版quickSort
 var quickSort = function (arr) {
-    if (arr.length < 1) {
+    if (arr.length <= 1) {
         return arr;
     }
-    let curIndex = parseInt(arr.length / 2);
+    let curIndex = Math.floor(arr.length / 2);
     let cur = arr.splice(curIndex, 1)[0];
     let left = [], right = [];
     for (let i = 0; i < arr.length; i++) {
         if (arr[i] < cur) {
             left.push(arr[i])
-        } else if (arr[i] > cur) {
+        } else {
             right.push(arr[i])
         }
     }

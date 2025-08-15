@@ -15,10 +15,10 @@
 // reduce() 方法对数组中的每个元素按序执行一个提供的 reducer 函数，
 // 每一次运行 reducer 会将先前元素的计算结果作为参数传入，最后将其结果汇总为单个返回值。
 // 1. 数组方法  2. 两两作用迭代  3.params: callback, initialValue(optional)
-Array.prototype.myReduce = function (callback, initialValue) {
+Array.prototype._reduce = function (cb, initialValue) {
     let accumulator;
     let startIndex;
-    if (!initialValue) {
+    if (initialValue === undefined) {
         accumulator = this[0];
         startIndex = 1;
     } else {
@@ -26,10 +26,13 @@ Array.prototype.myReduce = function (callback, initialValue) {
         startIndex = 0;
     }
     for (let i = startIndex; i < this.length; i++) {
-        accumulator += callback(accumulator, this[i], i, this);
+        accumulator = cb(accumulator, this[i], i, this);
     }
     return accumulator;
 }
+
+const ans = [1, 2, 3, 4]._reduce((prev, cur) => prev + cur);
+console.log(ans);
 
 
 

@@ -1,34 +1,15 @@
 
-Function.prototype.apply = (obj, ...args) => {
+Function.prototype._apply = function (self, ...args) {
   if (typeof this !== 'function') {
     throw new Error('this is not a function');
   }
-  let result = null;
-  obj = obj || window;
-  obj.fn = this;
-  if (args.length) {
-    result = obj.fn(args)
+  self = self || globalThis;
+  self.fn = this; // this是调用apply的函数, 挂到要指定的this也就是obj身上
+  if (args) {
+    result = self.fn(...args);
   } else {
-    result = obj.fn()
+    result = self.fn();
   }
-  delete obj.fn;
+  delete self.fn;
   return result;
 }
-
-Function.prototype.apply = (obj, ...args) => {
-  if (typeof this !== 'function') {
-    throw new Error('this is not a function');
-  }
-  let result = null;
-  obj = obj || window;
-  obj.fn = this;
-  if (args.length) {
-    result = obj.fn(args)
-  } else {
-    result = obj.fn()
-  }
-  delete obj.fn;
-  return result;
-}
-
-

@@ -17,9 +17,11 @@ function isSymmetric(root: TreeNode | null): boolean {
 };
 
 const check = (l: TreeNode | null, r: TreeNode | null): boolean => {
-    if (!l && !r) return true; // 这一行必须在上边，因为如果l和r都是null，那么l.val和r.val会return false, 但是这个时候应该return true
-    if (!l || !r) return false;
-    // 每次先检查两侧根节点是否相等，再递归检查左侧树的左节点和右侧树的右节点，左侧树的右节点和右侧树的左节点
-    // 有一个不等就返回false，所以这里用&&
+    if (!l && !r) return true; // 这是终止条件，如果两侧都没有节点，说明是对称的
+    if (!l || !r) return false; // 如果一侧有节点而另一侧没有，说明不对称
+
+    // 如果两侧都有节点，比较它们的值，并递归检查它们的子节点
+    // 注意这里是 l.left 和 r.right 以及 l.right 和 r.left
+    // 这就是对称的检查
     return l.val === r.val && check(l.left, r.right) && check(l.right, r.left);
 }

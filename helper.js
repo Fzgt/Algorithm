@@ -1,28 +1,39 @@
-// 数组转树
-function toTree(list) {
-    const tree = [];
-    const map = {};
+function batchRequest(urls, maxConcurrent) {
+    return new Promise((resolve, reject) => {
+        const results = [];
+        let currentIndex = 0;
+        let activeCount = 0;
 
-    for (const item of list) {
-        const {id, parentId, ...rest} = item;
-
-        if (!map[id]) {
-            map[id] = {id, children: []};
-        }
-
-        Object.assign(map[id], rest);
-
-        const node = map[id];
-        
-        if (parentId === 0) {
-            tree.push(node);
-        } else {
-            if (!map[parentId]) {
-                map[parentId] = {id: parentId, children: []}
+        function next() {
+            if (currentIndex >= urls.length && activeCount === 0) {
+                resolve(results);
+                return;
             }
-            map[parentId].children.push(node);
-        }
-    }
 
-    return tree;
+            while (activeCount < maxConcurrent && currentIndex < urls.length) {
+                const index = currentIndex++;
+                activeCount++;
+
+                fetch(urls[index])
+                    .then(res => res.json())
+                    .then(data => {
+                        results[index] = data;
+                        activeCount--;
+                        next();
+                    })
+                    .catch(err => {
+                        reject(err);
+                    })
+            }
+        }
+
+        next();
+    })
 }
+
+
+
+
+
+
+// reduce实现 批量请求函数 npm循环依赖 Object.create() currying call bind deepClone

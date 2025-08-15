@@ -20,3 +20,6 @@ function invertTree(root: TreeNode | null): TreeNode | null {
     root.right = left;
     return root;
 };
+
+// 写递归的时候，如果要递归自身，你就把invertTree当成黑盒，你就假设它就是能完成翻转的功能
+// 就假设这是一个三个节点的树，你写这个函数就是写给一个三个节点的树用的

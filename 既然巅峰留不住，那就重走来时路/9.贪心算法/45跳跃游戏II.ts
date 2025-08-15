@@ -16,3 +16,5 @@ function jump(nums: number[]): number {
 
     return step;
 };
+
+// 题目是保证能到达终点的，所以只是要找最少的跳跃次数

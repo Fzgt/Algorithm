@@ -21,3 +21,7 @@ function maxDepth(root: TreeNode | null): number {
         return Math.max(left, right) + 1; //每次递归都下一层，所以加1
     }
 };
+
+// 树里的递归：
+// 返回条件一般都是root === null （root就理解为当前节点）
+// 然后递归内容 一般都是去取 left 和 right，然后return就是对这两个值进行某种操作
