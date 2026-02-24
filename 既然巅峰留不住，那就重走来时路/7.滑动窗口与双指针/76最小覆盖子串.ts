@@ -29,8 +29,8 @@ function minWindow(s: string, t: string): string {
             const del = s[l];
             l++; // 只在满足最小覆盖子串时，才开始收缩左指针，否则window依然包含所有t中的字符
 
-            if (needs.has(del)) { // 移动左指针，缩小window时，更新window和valid
-                if (window.get(del) === needs.get(del)) {
+            if (needs.has(del)) {
+                if (window.get(del) === needs.get(del)) { // 说明该字符当前是满足needs要求的，那么l++后就不满足了，valid--，valid代表多少个字符满足个数要求。
                     valid--;
                 }
                 window.set(del, window.get(del) - 1);

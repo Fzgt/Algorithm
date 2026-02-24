@@ -1,10 +1,15 @@
 // 35. 搜索插入位置 左侧二分
 function searchInsert(nums: number[], target: number): number {
-    const n = nums.length;
-    let l = 0, r = n - 1, ans = n;
+    let l = 0, r = nums.length - 1, ans = nums.length;
+    // ans 初始化为 nums.length，表示如果 target 大于数组中所有元素，默认插入到最后。
     while (l <= r) {
         let mid = ((r - l) >> 1) + l;
-        if (nums[mid] >= target) { // >= target, 属于把target逼到左侧，暗示要往左侧插
+        if (nums[mid] >= target) { // 寻找第一个 大于等于 target 的元素。
+        // 如果 nums[mid] >= target：
+        // mid 有可能是插入位置，所以更新 ans = mid。
+        // 同时将右边界缩小：r = mid - 1，继续在左半区寻找是否有更小的符合条件的索引。
+        // 如果 nums[mid] < target：
+        // 插入位置在右边，左边界右移：l = mid + 1。
             ans = mid; // 记录可能的插入位置
             r = mid - 1; // 找左侧边界
         }
@@ -13,3 +18,9 @@ function searchInsert(nums: number[], target: number): number {
 
     return ans;
 };
+
+// 时间复杂度：O(log n)
+
+// 空间复杂度：O(1)
+
+// 属于标准二分查找变体。

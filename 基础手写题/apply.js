@@ -13,3 +13,21 @@ Function.prototype._apply = function (self, ...args) {
   delete self.fn;
   return result;
 }
+
+function _apply(self, ...args) {
+  if (typeof this === 'function') {
+    throw new Error('this param is not a function');
+  }
+
+  let self = self || globalThis;
+  self.fn = this;
+  let res;
+
+  if (args) {
+    res = self.fn(args);
+  } else {
+    res = self.fn();
+  }
+  delete self.fn;
+  return res;
+}

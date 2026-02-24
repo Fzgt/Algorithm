@@ -31,7 +31,7 @@ function numIslands(grid: string[][]): number {
     for (let i = 0; i < rows; i++) {
         for (let j = 0; j < cols; j++) {
             if (grid[i][j] === '1') {
-                count++; // 遇到岛屿计数加1，并dfs周围的岛屿全部沉没
+                count++; // 遇到岛屿计数加1，并将岛屿沉没，连在一起的格子算是同一个岛屿
                 dfs(i, j);
             }
         }

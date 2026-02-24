@@ -11,28 +11,24 @@
  */
 // 2. 两数相加
 function addTwoNumbers(l1: ListNode | null, l2: ListNode | null): ListNode | null {
-    let head = null, tail = null;
+    const preHead = new ListNode(-1);
+    let prev = preHead;
     let carry = 0;
     while (l1 || l2) {
-        let val1 = l1 && l1.val || 0;
-        let val2 = l2 && l2.val || 0;
-        let sum = val1 + val2 + carry;
-        if (!head) {
-            head = tail = new ListNode(sum % 10);
-        } else {
-            tail.next = new ListNode(sum % 10);
-            tail = tail.next;
-        }
+        const val1 = l1 && l1.val || 0;
+        const val2 = l2 && l2.val || 0;
+        const sum = val1 + val2+ carry;
+        const num = sum % 10;
+        const node = new ListNode(num);
+        prev.next = node;
+        prev = prev.next;
         carry = Math.floor(sum / 10);
-        if (l1) {
-            l1 = l1.next;
-        }
-        if (l2) {
-            l2 = l2.next;
-        }
+        if (l1) l1 = l1.next;
+        if (l2) l2 = l2.next;
     }
+
     if (carry > 0) {
-        tail.next = new ListNode(carry);
+        prev.next = new ListNode(carry);
     }
-    return head;
+    return preHead.next;
 };

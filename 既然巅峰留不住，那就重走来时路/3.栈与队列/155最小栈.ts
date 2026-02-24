@@ -10,7 +10,10 @@ class MinStack {
 
     push(val: number): void {
         this.stack.push(val);
-        this.minStack.push(Math.min(this.minStack[this.minStack.length - 1], val));
+        this.minStack.push(Math.min(this.minStack[this.minStack.length - 1], val)); 
+        // 不比最小栈的栈顶元素小，就将最小栈的栈顶元素压入
+        // 保持minStack 的长度和 stack 始终一致
+        // 这样之后pop的时候stack和minStack必须同时弹出，才能保持对应关系
     }
 
     pop(): void {

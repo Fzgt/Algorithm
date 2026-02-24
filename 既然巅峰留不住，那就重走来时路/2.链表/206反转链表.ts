@@ -20,3 +20,14 @@ function reverseList(head: ListNode | null): ListNode | null {
     }
     return prev;
 };
+
+const _reverseList = () => {
+    let [prev, cur] = [null, head];
+    while (cur) {
+        let temp = cur.next;
+        cur.next = prev;
+        prev = cur;
+        cur = temp;
+    }
+    return prev;
+}

@@ -10,7 +10,7 @@ function longestCommonPrefix(strs: string[]): string {
             if (prevs.charAt(j) !== strs[i].charAt(j)) break; // 如果j位置的两个元素不相等，就比到这里
         }
 
-        prevs = prevs.substring(0, j); // substring前闭后开，所以不包括j
+        prevs = prevs.substring(0, j); // 把 prevs 更新为和 strs[i] 的公共前缀
         if (prevs === '') return '';
     }
     return prevs;

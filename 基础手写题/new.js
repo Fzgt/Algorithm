@@ -43,6 +43,25 @@ function _new(constructor, ...args) {
 
 function _new(constructor, ...args) {
     if (typeof constructor !== 'function') {
+
+    }
+
+    const otherParams = Array.from(args);
+    const obj = Object.create(constructor.prototype);
+    const res = constructor.apply(obj, otherParams)
+
+    const isObject = typeof res === 'object' && res !== null;
+    const isFunctiion = typeof res == 'function';
+
+    if (isObject || isFunctiion) {
+        return res
+    } else {
+        return obj
+    }
+}
+
+function _new(constructor, ...args) {
+    if (typeof constructor !== 'function') {
         throw 'params error';
     }
 

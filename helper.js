@@ -1,39 +1,19 @@
-function batchRequest(urls, maxConcurrent) {
-    return new Promise((resolve, reject) => {
-        const results = [];
-        let currentIndex = 0;
-        let activeCount = 0;
+const quickSort = (arr) => {
+    if (arr.length <= 1) {
+        return arr
+    }
 
-        function next() {
-            if (currentIndex >= urls.length && activeCount === 0) {
-                resolve(results);
-                return;
-            }
+    const midIndex = Math.floor(arr.length / 2);
+    const cur = arr.splice(midIndex, 1)[0];
 
-            while (activeCount < maxConcurrent && currentIndex < urls.length) {
-                const index = currentIndex++;
-                activeCount++;
-
-                fetch(urls[index])
-                    .then(res => res.json())
-                    .then(data => {
-                        results[index] = data;
-                        activeCount--;
-                        next();
-                    })
-                    .catch(err => {
-                        reject(err);
-                    })
-            }
+    let left = [], right = [],
+    for (let i = 0; i < arr.length; i++) {
+        if (nums[i] < cur) {
+            left.push(nums[i]);
+        } else {
+            right.push(nums[i]);
         }
+    }
 
-        next();
-    })
+    return quickSort(left).concat(cur, quickSort(right));
 }
-
-
-
-
-
-
-// reduce实现 批量请求函数 npm循环依赖 Object.create() currying call bind deepClone

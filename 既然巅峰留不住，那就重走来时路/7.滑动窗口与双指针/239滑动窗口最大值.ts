@@ -4,7 +4,8 @@ function maxSlidingWindow(nums: number[], k: number): number[] {
     const result = [];
 
     for (let i = 0; i < nums.length; i++) {
-        // 如果超出窗口范围，移除队首元素
+        // i - k + 1 是窗口的左边界索引，i是右边界索引
+        // 如果队首元素的索引小于窗口左边界索引，说明队首元素已经不在窗口内了
         if (deque.length && i - k + 1 > deque[0]) {
             deque.shift();
         }
@@ -17,12 +18,24 @@ function maxSlidingWindow(nums: number[], k: number): number[] {
         // 处理完递减队列后，将当前元素加入队列
         deque.push(i); // 这里是加入索引
 
-        // 每次循环都要收集结果，除非窗口不存在
-        // i是窗口右边界，窗口长度i-k+1大于等于0，移项后即i>=k-1
-        if (i >= k - 1) {
+        // i - k + 1代表窗口有k个元素，才可以收集结果
+        if (i - k + 1 >= 0) {
             result.push(nums[deque[0]]);  // 每个有效窗口的队首元素即为最大值
         }
     }
 
     return result;
 };
+
+// 暴力解法：
+// function maxSlidingWindow(nums: number[], k: number): number[] {
+//     let ans: number[] = [];
+//     for (let i = 0; i <= nums.length - k; i++) {
+//         let max = -Infinity;
+//         for (let j = i; j < i + k; j++) {
+//             max = Math.max(max, nums[j]);
+//         }
+//         ans.push(max);
+//     }
+//     return ans;
+// };

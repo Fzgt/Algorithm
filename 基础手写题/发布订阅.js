@@ -1,5 +1,5 @@
 // 发布订阅模式
-const handlers = {};
+const handles = {};
 const e = {
 	on: (type, foo) => {
 		if (handlers[type]) {
@@ -24,3 +24,21 @@ e.on("huxiao", () => {
 e.on("huxiao");
 
 
+const _e = {
+	on: (type, foo) => {
+		if (fn[type]) {
+			handles[type].push(foo);
+		} else {
+			handles[type] = [foo];
+		}
+	},
+	emit: (type) => {
+		if (handles[type]) {
+			handles[type].forEach(fn => {
+				fn();
+			})
+		} else {
+			throw new Error(`${type} is not exist`);
+		}
+	}
+}

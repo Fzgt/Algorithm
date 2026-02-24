@@ -15,3 +15,21 @@ function subarraySum(nums: number[], k: number): number {
     }
     return count;
 };
+// 用map存所有的前缀和的出现次数，当 pre - k = X出现过，
+// 那说明 pre - X = k, 也就是存在一个子数组和为k，
+// X出现了多少次，就说明存在多少个子数组和为k
+
+// function subarraySum(nums: number[], k: number): number {
+//     const map: Map<number, number> = new Map();
+//     let pre = 0;
+//     let ans = 0;
+//     map.set(0, 1);
+//     for (const num of nums) {
+//         pre += num;
+//         if (map.has(pre - k)) {
+//             ans += map.get(pre - k);
+//         }
+//         map.set(pre, (map.get(pre) | 0) + 1);
+//     }
+//     return ans;
+// };

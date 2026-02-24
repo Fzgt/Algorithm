@@ -48,3 +48,18 @@ const __instanceOf = (instance, constructor) => {
 		}
 	}
 }
+
+const _instanceOf = (instance, constructor) => {
+	let proto = Object.getPrototypeOf(instance);
+	let prototype = constructor.prototype;
+	while (true) {
+		if (proto === prototype) {
+			return true;
+		}
+		if (!proto) {
+			return false;
+		} else {
+			proto = Object.getPrototypeOf(proto)
+		}
+	}
+}

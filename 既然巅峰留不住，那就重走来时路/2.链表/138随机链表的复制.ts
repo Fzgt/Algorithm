@@ -17,7 +17,8 @@ function copyRandomList(head: _Node | null, cachedNode = new Map()): _Node | nul
     if (!head) return null;
 
     if (!cachedNode.has(head)) {
-        cachedNode.set(head, { val: head.val });
+        cachedNode.set(head, { val: head.val }); 
+        // 在map里设置head，并通过赋值构造新节点，从而深拷贝，底下递归处理节点next和random，而next和random也会被深拷贝
 
         Object.assign(cachedNode.get(head), {
             next: copyRandomList(head.next, cachedNode),

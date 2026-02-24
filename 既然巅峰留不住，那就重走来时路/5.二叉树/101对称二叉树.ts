@@ -25,3 +25,16 @@ const check = (l: TreeNode | null, r: TreeNode | null): boolean => {
     // 这就是对称的检查
     return l.val === r.val && check(l.left, r.right) && check(l.right, r.left);
 }
+
+
+// function isSymmetric(root: TreeNode | null): boolean {
+//     if (!root) return true;
+
+//     const isMirror = (t1: TreeNode | null, t2: TreeNode | null): boolean => {
+//         if (!t1 && !t2) return true; // 都不存在也算对称
+//         if (!t1 || !t2) return false;
+//         return t1.val === t2.val && isMirror(t1.left, t2.right) && isMirror(t1.right, t2.left);
+//     }
+
+//     return isMirror(root.left, root.right);
+// };

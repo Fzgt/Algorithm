@@ -8,3 +8,8 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms))
 }
 foo();
+
+
+function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms))
+}

@@ -17,6 +17,8 @@ function firstMissingPositive(nums: number[]): number {
             nums[i] <= n &&
             nums[i] !== i + 1 &&  // 说明nums[i]不在正确的位置上
             nums[i] !== nums[nums[i] - 1] // 防止换位置两个数相等导致死循环
+            // 假设我们现在在索引 i，当前数字是 nums[i]。
+            // 目标是把 nums[i] 放到它应该在的位置 —— 索引 nums[i] - 1。
         ) {
             const temp = nums[i];
             nums[i] = nums[temp - 1];
