@@ -26,3 +26,31 @@ function longestConsecutive(nums: number[]): number {
 
     return longestStreak;
 };
+
+// 变量名更简洁版本
+// function longestConsecutive(nums: number[]): number {
+//     const set = new Set<number>();
+
+//     for (const num of nums) {
+//         set.add(num);
+//     }
+
+//     let ans = 0;
+
+//     for (const num of set) {
+
+//         let cur = num;
+//         let streak = 1;
+
+//         if (!set.has(num - 1)) {
+//             while (set.has(cur + 1)) {
+//                 cur += 1;
+//                 streak += 1;
+//             }
+//         }
+
+//         ans = Math.max(ans, streak);
+//     }
+
+//     return ans;
+// };
