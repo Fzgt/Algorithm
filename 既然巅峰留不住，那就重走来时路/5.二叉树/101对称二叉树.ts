@@ -26,15 +26,13 @@ const check = (l: TreeNode | null, r: TreeNode | null): boolean => {
     return l.val === r.val && check(l.left, r.right) && check(l.right, r.left);
 }
 
-
+// 更优雅版本
 // function isSymmetric(root: TreeNode | null): boolean {
-//     if (!root) return true;
-
-//     const isMirror = (t1: TreeNode | null, t2: TreeNode | null): boolean => {
-//         if (!t1 && !t2) return true; // 都不存在也算对称
-//         if (!t1 || !t2) return false;
-//         return t1.val === t2.val && isMirror(t1.left, t2.right) && isMirror(t1.right, t2.left);
-//     }
-
 //     return isMirror(root.left, root.right);
 // };
+
+// const isMirror = (l, r) => {
+//     if (!l && !r) return true;
+//     if (!l || !r) return false;
+//     return l.val === r.val && isMirror(l.left, r.right) && isMirror(l.right, r.left);
+// }
