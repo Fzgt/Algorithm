@@ -1,11 +1,12 @@
 // 239. 滑动窗口最大值 滑动窗口+单调队列
 function maxSlidingWindow(nums: number[], k: number): number[] {
-    const deque = []; // 双端队列存放窗口内的索引
+    const deque = []; // 存的是 索引
     const result = [];
 
     for (let i = 0; i < nums.length; i++) {
         // i - k + 1 是窗口的左边界索引，i是右边界索引
-        // 如果队首元素的索引小于窗口左边界索引，说明队首元素已经不在窗口内了
+        // 如果队首元素的索引小于窗口左边界索引，队头的索引已经不在窗口范围内了
+        // 窗口每次只右移一个，所以每轮最多一个元素过期，用if就够了不用while
         if (deque.length && i - k + 1 > deque[0]) {
             deque.shift();
         }
@@ -16,9 +17,9 @@ function maxSlidingWindow(nums: number[], k: number): number[] {
         }
 
         // 处理完递减队列后，将当前元素加入队列
-        deque.push(i); // 这里是加入索引
+        deque.push(i); // 注意这里 加的事索引
 
-        // i - k + 1代表窗口有k个元素，才可以收集结果
+        // 这里主要是为了避免一开始窗口没形成的时候就记录结果了，以后i-k+1会越来越大。
         if (i - k + 1 >= 0) {
             result.push(nums[deque[0]]);  // 每个有效窗口的队首元素即为最大值
         }
