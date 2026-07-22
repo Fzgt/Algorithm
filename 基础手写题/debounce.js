@@ -1,109 +1,26 @@
 function debounce(fn, wait, immediate) {
-	let timer = null;
-	//  返回一个函数
-	return function (...args) {
-		// 每次触发事件时都取消之前的定时器
-		clearTimeout(timer);
-		// 判断是否要立即执行一次
+	let timer = null; // 用闭包存一个变量
+	function debounced(...args) {
+		clearTimeout(timer); // 每次进来 都要重置定时器，防抖机制
 
-		if (immediate && !timer) {
-			fn.apply(this, args);
-		}
-		// setTimeout中使用箭头函数，就是让 this指向 返回的该闭包函数，而不是 debounce函数的调用者
-		timer = setTimeout(() => {
-			fn.apply(this, args);
-		}, wait);
-	};
-}
-
-
-const debounce = (fn, wait, immediate) => {
-	let timer = null;
-	return function (...args) {
-		clearTimeout(timer);
-
-		if (immediate && !timer) {
-			fn.apply(this, args)
-		}
+		const callNow = immediate && !timer; 
+		// immediate = 需要立即执行，!timer = 无定时器在等待中，满足这两点就立刻调用
+		// timer存在的话，说明之前进来过，那么即便immediate是true，之前也立即执行过了，不需要我们担心，所以这次就不用执行了
+		if (callNow) fn.apply(this, args);
 
 		timer = setTimeout(() => {
-			fn.apply(this, args)
-		}, wait)
-	}
-
-}
-
-const debounce = (fn, wait, immediate) => {
-	let timer = null;
-	return function (...args) {
-		clearTimeout(timer);
-
-		if (!timer && immediate) {
-			fn.apply(this, args)
-		}
-
-		timer = setTimeout(() => {
-			fn.apply(this, args)
-		}, wait)
-	}
-}
-
-
-
-
-
-
-const debounce = (fn, wait, immediate) => {
-	let timer = null;
-
-	return function (...args) {
-		clearTimeout(timer);
-
-		if (immediate && !timer) {
-			fn.apply(this, args)
-		}
-
-		timer = setTimeout(() => {
-			fn.apply(this, args);
+			timer = null; // 重置定时器变量，为了下次防抖还能用
+			if (!immediate) fn.apply(this, args); // 不是立即执行版，就时间到了执行
 		}, wait);
 	}
-}
 
-const debounce = (fn, wait, immediate) => {
-	let timer = null;
-	return function (...args) {
-		clearTimeout(timer);
-
-		if (immediate && !timer) {
-			fn.apply(this, args)
-		}
-
-		timer = setTimeout(() => {
-			fn.apply(this, args)
-		}, wait)
+	debounced.cancel = function() {
+		clearTimeout(timer); // 清除时间还未到的定时器(未进入宏任务队列)，用来反悔
+		timer = null; // 重置定时器变量，为了下次防抖还能用
 	}
+
+	return debounced;
 }
-
-
-
-
-
-
-
-
-const fn = () => {
-	console.log('hello huxiao')
-}
-const debounceFoo = debounce(fn, 3000, true);
-debounceFoo()
-debounceFoo()
-debounceFoo()
-
-
-
-
-
-
 
 
 // const vm = {

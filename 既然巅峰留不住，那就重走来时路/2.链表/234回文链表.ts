@@ -11,15 +11,34 @@
  */
 // 234. 回文链表
 function isPalindrome(head: ListNode | null): boolean {
-    const vals = [];
-    while (head) { // 不能写head.next，不然少判断
-        vals.push(head.val);
-        head = head.next;
-    }
+  const vals = [];
+  while (head) {
+    // 不能写head.next，不然少判断
+    vals.push(head.val);
+    head = head.next;
+  }
 
-    for (let i = 0, j = vals.length - 1; i < j; i++, j--) {
-        if (vals[i] !== vals[j]) return false;
-    }
+  for (let i = 0, j = vals.length - 1; i < j; i++, j--) {
+    if (vals[i] !== vals[j]) return false;
+  }
 
-    return true;
-};
+  return true;
+}
+
+// 双指针判断回文，好理解一些
+// function isPalindrome(head: ListNode | null): boolean {
+//     const arr = [];
+//     let cur = head;
+//     while (cur) {
+//         arr.push(cur.val);
+//         cur = cur.next;
+//     }
+
+//     let l = 0, r = arr.length - 1;
+//     while (l < r) {
+//         if (arr[l] !== arr[r]) return false;
+//         l++;
+//         r--;
+//     }
+//     return true;
+// };
